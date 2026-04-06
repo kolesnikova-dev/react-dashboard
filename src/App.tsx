@@ -1,35 +1,21 @@
-import { useEffect, useState } from 'react'
+import { Dashboard, Footer } from './components';
 
-import { TasksContext } from './context/TasksContext'
+import { TasksProvider } from './context/TaskProvider';
 
-import { getProcessedTasks } from './api/TaskService';
+import './App.css';
+import './tailwindStyles';
 
-import { Dashboard } from './components';
-
-import type { TaskData } from './types';
-
-import './App.css'
 
 function  App() {
-     const [tasks, setTasks] = useState<TaskData[]>([]);
 
-     useEffect(() => {
-        const getTasks = async () => {
-            try {
-              const tasks = await getProcessedTasks();
-              setTasks(tasks);
-            } catch (error) {
-              console.error('Error fetching tasks:', error);
-            }
-        };
-        
-        getTasks();
-     }, []);
 
-    return (
-        <TasksContext.Provider value={{ tasks, setTasks }}>
-            <Dashboard />
-        </TasksContext.Provider>
+    return (   
+        <TasksProvider>
+            <div id="center">
+                <Dashboard />
+                <Footer />
+            </div>
+        </TasksProvider>     
     );
 }
 
