@@ -1,10 +1,10 @@
-import { useTasksContext } from "../../hooks/useTasksContext";
+import { useTasks } from "../../hooks/useTasks";
 
 import { TaskItem } from "./TaskItem";
 
 export const TaskList: React.FC = () => {
 
-    const { tasks } = useTasksContext();
+    const { tasks } = useTasks();
 
     return (
         <ul className="task-list">

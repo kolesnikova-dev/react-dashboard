@@ -18,13 +18,17 @@ const fetchDummyTaskData = async () => {
     }
 }
 
-export const getProcessedTasks = async () => {
+export const getTasks = async () => {
     const dummyJsonTasks = await fetchDummyTaskData();
     let processedDummyJsonTasks;
     if (dummyJsonTasks && dummyJsonTasks.todos) {
         processedDummyJsonTasks = dummyJsonTasks.todos.map((task: DummyTaskData) => ({
             id: task.id,
             description: task.todo,
+            status: task.status ? 'done' : 'todo',
+            priority: 'unprioritized', 
+            createdAt: new Date().toISOString(), 
+            updatedAt: new Date().toISOString(), 
         }));
     }
     return processedDummyJsonTasks;
