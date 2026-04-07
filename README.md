@@ -1,3 +1,7 @@
+Current state of development:
+<img width="969" height="820" alt="image" src="https://github.com/user-attachments/assets/5a272e9c-10d9-4d4e-8d5d-f0749463921e" />
+
+
 ## Project Planning
 
 ### Requirements Analysis

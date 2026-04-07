@@ -1,11 +1,6 @@
 import { createContext, type Dispatch } from 'react';
 
-import type { TaskData } from '../types';
-
-type TaskAction = 
-  | { type: 'add'; payload: TaskData }
-  | { type: 'edit'; payload: TaskData }
-  | { type: 'delete'; payload: TaskData };
+import type { TaskData, TaskAction } from '../types';
 
 interface TasksContextType {
     tasks: TaskData[];
