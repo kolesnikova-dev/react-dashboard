@@ -1,13 +1,7 @@
-import type { TaskData } from "../types";
+import type { TaskData, TaskAction } from "../types";
 
 const TODAY = new Date().toLocaleDateString();
 const RANDOM_ID = Math.floor((Math.random() * 100000) + 1).toFixed();
-
-export type TaskAction = 
-  | { type: 'add'; payload: Omit<TaskData, 'id' | 'createdAt' | 'updatedAt' | 'status' | 'priority'> }
-  | { type: 'edit'; payload: TaskData }
-  | { type: 'delete'; payload: { id: string } }
-  | { type: 'fetched'; payload: TaskData[] }
 
 export function tasksReducer (tasks: TaskData[], action: TaskAction): TaskData[] {
   switch (action.type) {

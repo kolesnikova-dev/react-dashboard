@@ -28,3 +28,8 @@ export interface FilterOptions {
     sortOrder?: SortOrder;
 }
 
+export type TaskAction = 
+  | { type: 'add'; payload: Omit<TaskData, 'id' | 'createdAt' | 'updatedAt' | 'status' | 'priority'> }
+  | { type: 'edit'; payload: TaskData }
+  | { type: 'delete'; payload: { id: string } }
+  | { type: 'fetched'; payload: TaskData[] }
