@@ -5,7 +5,7 @@ interface TableData {
   id: string;
   cells: {
     [key: string]: string | React.ReactNode;
-    Button: React.ReactNode;
+    Button: React.ReactNode | React.ReactNode[];
   };
 }
 
@@ -20,7 +20,8 @@ const TABLE_STYLES = {
 }
 
 const CELL_STYLES = {
-  hover: "white",
+  bgColor: "bg-violet-950",
+  hover: "hover:bg-violet-900",
 }
 
 export const ResponsiveTable: React.FC<Props> = ({ tableHeads, tableData }) => {
@@ -42,9 +43,9 @@ export const ResponsiveTable: React.FC<Props> = ({ tableHeads, tableData }) => {
             return (
               <th
                 key={header}
-                className={`${getHeaderStyle(header)} ${columnHover === index ? "bg-yellow-950" : ""}`}
+                className={`${getHeaderStyle(header)} ${columnHover === index ? CELL_STYLES.bgColor : ""}`}
                 onMouseEnter={() => handleMouseEnter(index)}
-                onMouseLeave={handleMouseLeave}
+                onMouseLeave={handleMouseLeave} 
               >
                 {header}
               </th>
@@ -52,7 +53,7 @@ export const ResponsiveTable: React.FC<Props> = ({ tableHeads, tableData }) => {
           })}
         </tr>
       </thead>
-      <tbody className="table-row-group bg-linear-to-bl to-white-opaque-80">
+      <tbody className="table-row-group">
         {tableData.map((row) => (
           <tr
             key={row.id}
@@ -60,19 +61,31 @@ export const ResponsiveTable: React.FC<Props> = ({ tableHeads, tableData }) => {
           >
             {Object.entries(row.cells).map(([header, content], index) => {
               const visibility = hideHeaderOnTabletAndDown(header); // returns "hidden md:table-cell" or ""
-              const bgColor = columnHover === index ? "blue" : "";
-              const hover = `transition ease-in-out hover:${CELL_STYLES.hover}`;
+              const bgColor = columnHover === index ? CELL_STYLES.bgColor : "";
+              const hover = `transition ease-in-out ${CELL_STYLES.hover}`;
 
-              return (
-                <td
-                  key={header}
-                  className={`border ${visibility} ${bgColor} ${hover}`}
-                  onMouseEnter={() => handleMouseEnter(index)}
-                  onMouseLeave={handleMouseLeave}
-                >
+              if (header === 'Status') {
+                console.log("I want to see dropdown here")
+                return (
+                 <select>
+                    <option value="todo">Pending</option>
+                    <option value="in-progress">In Progress</option>
+                    <option value="completed">Completed</option>
+                  </select>
+                )  
+              } else {
+                return (
+                  <td
+                    key={header}
+                    className={`border ${visibility} ${bgColor} ${hover}`}
+                    onMouseEnter={() => handleMouseEnter(index)}
+                    onMouseLeave={handleMouseLeave}
+                    id={row.id}
+                  >
                   {content}
                 </td>
-              );
+                )
+              };
             })}
           </tr>
         ))}
