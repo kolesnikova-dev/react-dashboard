@@ -1,8 +1,8 @@
-import { TaskFilter, TaskForm, TaskList, TailwindGrid } from '../internal';
+import { TaskFilter, TaskForm, TaskList, NarrowWideGrid } from '../internal';
 import { DashboardHeader } from './DashboardHeader';
 import { Statistics } from '../Statistics/Statistics';
 
-import { displayFlex } from "../../tailwindStyles"
+import { displayFlex } from '../../tailwindStyles';
 
 const ContainerWithHeader = ({ header, children }: { header: string; children: React.ReactNode }) => {
   return (
@@ -10,28 +10,28 @@ const ContainerWithHeader = ({ header, children }: { header: string; children: R
       <legend className="text-left text-lg font-semibold px-4 ml-6">{header}</legend>
       {children}
     </fieldset>
-  )
-}
+  );
+};
 
 export const Dashboard = () => {
 
   return (
     <div className={displayFlex}>
-        <DashboardHeader />
-        <TailwindGrid>
-          <ContainerWithHeader header="Statistics">
-            <Statistics />
-          </ContainerWithHeader>
-           <ContainerWithHeader header="Task Controls">
-            <TaskFilter />
-          </ContainerWithHeader>
-           <ContainerWithHeader header="Add New Task">
-           <TaskForm />
-          </ContainerWithHeader>
-           <ContainerWithHeader header="Task List">
-            <TaskList />
-          </ContainerWithHeader>
-        </TailwindGrid>
+      <DashboardHeader />
+      <NarrowWideGrid >
+        <ContainerWithHeader header="Statistics">
+          <Statistics />
+        </ContainerWithHeader>
+        <ContainerWithHeader header="Task Controls">
+          <TaskFilter />
+        </ContainerWithHeader>
+        <ContainerWithHeader header="Add New Task">
+          <TaskForm />
+        </ContainerWithHeader>
+        <ContainerWithHeader header="Task List">
+          <TaskList />
+        </ContainerWithHeader>
+      </NarrowWideGrid >
     </div>
-  )
-}
+  );
+};

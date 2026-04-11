@@ -1,14 +1,14 @@
-import { useTasks } from "../../hooks/index";
+import { useTasks } from '../../hooks/index';
 
-import { TailwindGrid } from "../internal"; 
+import { WideNarrowGrid } from '../internal';
 
 
 export const Statistics = () => {
-  const {tasks} = useTasks();
+  const { tasks } = useTasks();
   const totalTasks = tasks.length;
   return (
-    <TailwindGrid>
-      <div className="flex justify-around"><span>Total:</span><span>{totalTasks}</span></div>
-    </TailwindGrid>
-  )
-}
+    <WideNarrowGrid >
+      <span className='text-left'>Total:</span><span className='text-left'>{totalTasks}</span>
+    </WideNarrowGrid >
+  );
+};
