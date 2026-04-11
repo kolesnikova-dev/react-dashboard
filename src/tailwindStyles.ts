@@ -1,4 +1,5 @@
-export const displayFlex = "flex flex-col items-center gap-8";
+export const displayFlex = 'flex flex-col items-center gap-8';
+export const displayFlexSmallGap = 'flex flex-col items-center gap-2';
 
 export const glowingBox = `
 w-full p-8 rounded-xl 

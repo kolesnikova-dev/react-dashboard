@@ -55,7 +55,7 @@ const EditButton = ({ taskId }: { taskId: string }) => {
 }
 
 
-
+// TODO: Add a fetching skeleton
 export const TaskList: React.FC = () => {
 
     const { tasks } = useTasks();

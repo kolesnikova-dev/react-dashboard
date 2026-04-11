@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { getHeaderStyle, hideHeaderOnTabletAndDown } from "./tableHeadsStyleUtils";
+import { useState } from 'react';
+import { getHeaderStyle, hideHeaderOnTabletAndDown } from './tableHeadsStyleUtils';
 
 interface TableData {
   id: string;
@@ -15,14 +15,14 @@ type Props = {
 };
 
 const TABLE_STYLES = {
-  bgColor: "",
-  borderColor: "blue",
-}
+  bgColor: '',
+  borderColor: 'blue',
+};
 
 const CELL_STYLES = {
-  bgColor: "bg-violet-950",
-  hover: "hover:bg-violet-900",
-}
+  bgColor: 'bg-violet-950',
+  hover: 'hover:bg-violet-900',
+};
 
 export const ResponsiveTable: React.FC<Props> = ({ tableHeads, tableData }) => {
   const [columnHover, setColumnHover] = useState<number>(-1);
@@ -36,16 +36,16 @@ export const ResponsiveTable: React.FC<Props> = ({ tableHeads, tableData }) => {
   };
 
   return (
-    <table className={`table-auto cursor-pointer mx-auto min-w-full group ${TABLE_STYLES.bgColor} shadow-lg border border-bs-cyan-400`}>
+    <table className={`table-auto mx-auto min-w-full group ${TABLE_STYLES.bgColor} shadow-lg border border-bs-cyan-400`}>
       <thead className="table-header-group shadow-lg">
         <tr>
           {tableHeads.map((header, index) => {
             return (
               <th
                 key={header}
-                className={`${getHeaderStyle(header)} ${columnHover === index ? CELL_STYLES.bgColor : ""}`}
+                className={`${getHeaderStyle(header)} ${columnHover === index ? CELL_STYLES.bgColor : ''}`}
                 onMouseEnter={() => handleMouseEnter(index)}
-                onMouseLeave={handleMouseLeave} 
+                onMouseLeave={handleMouseLeave}
               >
                 {header}
               </th>
@@ -61,31 +61,32 @@ export const ResponsiveTable: React.FC<Props> = ({ tableHeads, tableData }) => {
           >
             {Object.entries(row.cells).map(([header, content], index) => {
               const visibility = hideHeaderOnTabletAndDown(header); // returns "hidden md:table-cell" or ""
-              const bgColor = columnHover === index ? CELL_STYLES.bgColor : "";
+              const bgColor = columnHover === index ? CELL_STYLES.bgColor : '';
               const hover = `transition ease-in-out ${CELL_STYLES.hover}`;
+              const selectStatus = (
+                <select
+                  className={`cursor-pointer border ${visibility} ${bgColor} ${hover}`}
+                  onMouseEnter={() => handleMouseEnter(index)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <option value="todo">Pending</option>
+                  <option value="in-progress">In Progress</option>
+                  <option value="completed">Completed</option>
+                </select>
+              );
 
-              if (header === 'Status') {
-                console.log("I want to see dropdown here")
-                return (
-                 <select>
-                    <option value="todo">Pending</option>
-                    <option value="in-progress">In Progress</option>
-                    <option value="completed">Completed</option>
-                  </select>
-                )  
-              } else {
-                return (
-                  <td
-                    key={header}
-                    className={`border ${visibility} ${bgColor} ${hover}`}
-                    onMouseEnter={() => handleMouseEnter(index)}
-                    onMouseLeave={handleMouseLeave}
-                    id={row.id}
-                  >
-                  {content}
+              return (
+                <td
+                  key={header}
+                  className={`border ${visibility} ${bgColor} ${hover}`}
+                  onMouseEnter={() => handleMouseEnter(index)}
+                  onMouseLeave={handleMouseLeave}
+                  id={row.id}
+                >
+                  {header === 'Status'
+                    ? selectStatus : content}
                 </td>
-                )
-              };
+              );
             })}
           </tr>
         ))}

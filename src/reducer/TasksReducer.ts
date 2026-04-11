@@ -1,16 +1,16 @@
-import type { TaskData, TaskAction } from "../types";
+import type { TaskData, TaskAction } from '../types';
 
 const TODAY = new Date().toLocaleDateString();
 const RANDOM_ID = Math.floor((Math.random() * 100000) + 1).toFixed();
 
-export function tasksReducer (tasks: TaskData[], action: TaskAction): TaskData[] {
+export function tasksReducer(tasks: TaskData[], action: TaskAction): TaskData[] {
   switch (action.type) {
     case 'add': {
       return [...tasks, {
         id: RANDOM_ID,
         description: action.payload.description,
-        status: "todo",
-        priority: "unprioritized",
+        status: 'todo',
+        priority: action.payload.priority,
         createdAt: TODAY,
         updatedAt: TODAY,
       }];
