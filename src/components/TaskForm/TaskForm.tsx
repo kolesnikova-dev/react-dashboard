@@ -6,6 +6,7 @@ import {
 } from 'react-hook-form';
 import { useTasks } from '../../hooks/index';
 import type { NewTaskData, Priority } from '../../types';
+import { PRIORITY } from '../../config';
 
 import { displayFlex, displayFlexSmallGap } from '../../tailwindStyles';
 
@@ -25,7 +26,7 @@ const FORM_INPUTS: Record<keyof FormFields, Inputs> = {
   },
   priority: {
     id: 'priority',
-    value: 'unprioritized',
+    value: PRIORITY.default,
   },
 };
 
@@ -51,11 +52,14 @@ const FormComponent: React.FC<FormComponentProps> = ({ formInput, register, erro
             {...register(id, { required: true })}
             className={`cursor-pointer`}
           >
-            <option defaultValue="unprioritized">Unprioritized</option>
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-            <option value="critical">Critical</option>
+            {Object.entries(PRIORITY).map(([priority, display]) => (
+              <option
+                defaultValue={priority === PRIORITY.default ? priority : undefined}
+                value={priority}
+                key={priority}>
+                {display}
+              </option>
+            ))}
           </select>
         ) : (
           <input

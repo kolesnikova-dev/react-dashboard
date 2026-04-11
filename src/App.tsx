@@ -6,17 +6,15 @@ import './App.css';
 import './tailwindStyles';
 
 
-function  App() {
-
-
-    return (   
-        <TasksProvider>
-            <div id="center">
-                <Dashboard />
-                <Footer />
-            </div>
-        </TasksProvider>     
-    );
+function App() {
+  return (
+    <TasksProvider>
+      <div id="center">
+        <Dashboard />
+        <Footer />
+      </div>
+    </TasksProvider>
+  );
 }
 
-export default App
+export default App;

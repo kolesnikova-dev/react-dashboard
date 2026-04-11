@@ -14,7 +14,6 @@ const ContainerWithHeader = ({ header, children }: { header: string; children: R
 };
 
 export const Dashboard = () => {
-
   return (
     <div className={displayFlex}>
       <DashboardHeader />

@@ -1,4 +1,5 @@
 export type Status = 'todo' | 'in-progress' | 'done';
+
 export type Priority = 'unprioritized' | 'low' | 'medium' | 'high' | 'critical';
 
 export interface DummyTaskData {
